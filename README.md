@@ -8,6 +8,7 @@
 - rxvt-unicode-patched 
 - zsh
   - zsh-syntax-highlighting
+  - zsh-pure-prompt-git-latest
 - vim
   - vundle
 - ttf-hack
