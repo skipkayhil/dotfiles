@@ -5,11 +5,23 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'chriskempson/base16-vim'
-
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 call vundle#end()
 filetype plugin indent on
 
 syntax on
+set relativenumber
+" Text Formatting
+
+set autoindent
+set smartindent
+set nowrap
+set softtabstop=4
+set shiftwidth=4
+set tabstop=4
+set expandtab
+set textwidth=80
 
 colorscheme base16-materia
