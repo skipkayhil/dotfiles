@@ -1,22 +1,21 @@
 if &compatible
     set nocompatible
 endif
-set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=~/.vim/bundles/repos/github.com/Shougo/dein.vim
 
-if dein#load_state(expand('~/.vim/dein'))
-    call dein#begin(expand('~/.vim/dein'))
+if dein#load_state(expand('~/.vim/bundles'))
+    call dein#begin(expand('~/.vim/bundles'))
     call dein#add('Shougo/dein.vim')
     call dein#add('itchyny/lightline.vim')
     call dein#add('chriskempson/base16-vim')
     call dein#end()
     call dein#save_state()
 endif
-"Plugin 'VundleVim/Vundle.vim'
-"Plugin 'chriskempson/base16-vim'
-"Plugin 'vim-airline/vim-airline'
-"Plugin 'vim-airline/vim-airline-themes'
 
-"call vundle#end()
+if dein#check_install()
+    call dein#install()
+endif
+
 filetype plugin indent on
 
 syntax on
@@ -31,5 +30,7 @@ set shiftwidth=4
 set tabstop=4
 set expandtab
 set textwidth=80
+
+set laststatus=2
 
 colorscheme base16-materia

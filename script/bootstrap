@@ -114,7 +114,28 @@ install_dotfiles () {
   done
 }
 
+install_dein () {
+    curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+    sh ./installer.sh ~/.vim/bundles
+}
+
+
+prompt_install_dein () {
+    if [ ! -d "$HOME/.vim/bundles/repos/github.com/Shougo/dein.vim" ]; then
+        echo "Do you wish to install dein.vim?"
+        select yn in "Yes" "No"; do 
+            case $yn in
+                Yes ) info "installing dein.vim"; install_dein; break;;
+                No ) fail "dein.vim not installed"
+            esac
+        done
+    else
+        success "dein.vim already installed" 
+    fi
+}
+
 install_dotfiles
+prompt_install_dein
 
 # If we're on a Mac, let's install and setup homebrew.
 if [ "$(uname -s)" == "Darwin" ]
