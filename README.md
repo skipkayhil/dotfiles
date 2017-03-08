@@ -2,14 +2,13 @@
 ##Packages
 - bspwm
   - sxhkd
-  - rofi
+  - rofi (maybe, maybe dmenu)
 - base-devel
   - pacaur
 - rxvt-unicode-patched 
-- tmux
 - zsh
   - zsh-syntax-highlighting
   - zsh-pure-prompt-git-latest
 - vim
-  - vundle
+  - dein.vim
 - ttf-hack
