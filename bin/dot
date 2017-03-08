@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+# dot
+#
+# 'dot' handles updates
+export ZSH=$HOME/.dotfiles
+
+# Update Pure
+if [ ! -d $HOME/.zfunctions ]
+then
+    mkdir $HOME/.zfunctions
+fi
+curl -o "$HOME/.zfunctions/prompt_pure_setup" https://raw.githubusercontent.com/sindresorhus/pure/master/pure.zsh 
+curl -o "$HOME/.zfunctions/async" https://raw.githubusercontent.com/sindresorhus/pure/master/async.zsh
+
