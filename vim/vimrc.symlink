@@ -1,10 +1,10 @@
 if &compatible
     set nocompatible
 endif
-set runtimepath+=~/.vim/bundles/repos/github.com/Shougo/dein.vim
+set runtimepath+=$HOME/.vim/bundles/repos/github.com/Shougo/dein.vim
 
-if dein#load_state(expand('~/.vim/bundles'))
-    call dein#begin(expand('~/.vim/bundles'))
+if dein#load_state('$HOME/.vim/bundles')
+    call dein#begin('$HOME/.vim/bundles')
     call dein#add('Shougo/dein.vim')
     call dein#add('itchyny/lightline.vim')
     call dein#add('chriskempson/base16-vim')
@@ -12,13 +12,13 @@ if dein#load_state(expand('~/.vim/bundles'))
     call dein#save_state()
 endif
 
+filetype plugin indent on
+syntax enable
+
 if dein#check_install()
     call dein#install()
 endif
 
-filetype plugin indent on
-
-syntax on
 set relativenumber
 " Text Formatting
 
