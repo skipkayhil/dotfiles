@@ -19,7 +19,7 @@ if dein#check_install()
     call dein#install()
 endif
 
-set relativenumber
+set number relativenumber
 " Text Formatting
 
 set autoindent
