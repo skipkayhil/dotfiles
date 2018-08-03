@@ -1,6 +1,11 @@
 #export LSCOLORS="exfxcxdxbxegedabagacad"
 export CLICOLOR=true
-eval $(dircolors ~/.dotfiles/theme/dircolors.base16.dark)
+
+if (( $+commands[gdircolors] )) then
+    eval $(gdircolors ~/.dotfiles/theme/dircolors.base16.dark)
+else
+    eval $(dircolors ~/.dotfiles/theme/dircolors.base16.dark)
+fi
 
 fpath=($ZSH/functions $fpath)
 fpath=("$HOME/.zfunctions" $fpath)
