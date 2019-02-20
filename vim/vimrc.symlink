@@ -34,4 +34,5 @@ set textwidth=80
 " Make sure Lightline shows up
 set laststatus=2
 
+let base16colorspace=256
 colorscheme base16-materia
