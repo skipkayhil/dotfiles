@@ -7,6 +7,9 @@ if [[ -a ~/.localrc ]]; then
   source ~/.localrc
 fi
 
+DOT_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
+DOT_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
+
 # all of our zsh files
 typeset -U config_files
 config_files=($ZSH/**/*.zsh)
@@ -36,7 +39,14 @@ do
   source $file
 done
 
-unset config_files
+unset config_files DOT_CONFIG_HOME DOT_CACHE_HOME
+
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "${key[Up]}" up-line-or-beginning-search # Up
+bindkey "${key[Down]}" down-line-or-beginning-search # Down
 
 if [ -d "/usr/share/zsh/plugins/zsh-syntax-highlighting" ]; then
     source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
