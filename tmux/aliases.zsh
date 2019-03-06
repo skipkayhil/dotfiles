@@ -1,1 +1,1 @@
-alias tmux='tmux -2'
+alias tmux="tmux -f \"${DOT_CONFIG_HOME}/tmux/tmux.conf\""
