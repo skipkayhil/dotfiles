@@ -1,6 +1,6 @@
 alias ..='cd ..'
 
-if $(gls &>/dev/null) 
+if (( $+commands[gls] ))
 then
     alias ls='gls -F --color'
     alias l='gls -lAh --color'

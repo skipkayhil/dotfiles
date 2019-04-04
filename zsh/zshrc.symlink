@@ -12,7 +12,9 @@ DOT_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
 
 # all of our zsh files
 typeset -U config_files
-config_files=($ZSH/**/*.zsh)
+setopt extendedglob
+config_files=($ZSH/^[zsh/plugins]/*.zsh)
+unsetopt extendedglob
 
 # load the path files
 for file in ${(M)config_files:#*/path.zsh}
@@ -41,11 +43,4 @@ done
 
 unset config_files DOT_CONFIG_HOME DOT_CACHE_HOME
 
-if [ -d "/usr/share/zsh/plugins/zsh-syntax-highlighting" ]; then
-    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-elif [ -d "/usr/share/zsh-syntax-highlighting" ]; then
-    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-elif [ -d "/usr/local/share/zsh-syntax-highlighting" ]; then
-    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
-
+source $ZSH/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh

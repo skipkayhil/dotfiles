@@ -7,8 +7,7 @@ else
     eval $(dircolors ~/.dotfiles/theme/dircolors.base16.dark)
 fi
 
-fpath=($ZSH/functions $fpath)
-fpath=("$HOME/.zfunctions" $fpath)
+fpath=($ZSH/zsh/plugins $fpath)
 
 #autoload -U $ZSH/functions/*(:t)
 
