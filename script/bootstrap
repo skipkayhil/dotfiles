@@ -116,13 +116,12 @@ install_dotfiles () {
 
 install_dein () {
     curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-    sh ./installer.sh ~/.vim/bundles
+    sh ./installer.sh $HOME/.cache/dein
     rm ./installer.sh
 }
 
-
 prompt_install_dein () {
-    if [ ! -d "$HOME/.vim/bundles/repos/github.com/Shougo/dein.vim" ]; then
+    if [ ! -d "$HOME/.cache/dein/repos/github.com/Shougo/dein.vim" ]; then
         echo "Do you wish to install dein.vim?"
         select yn in "Yes" "No"; do 
             case $yn in

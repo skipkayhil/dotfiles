@@ -1,11 +1,11 @@
 if &compatible
     set nocompatible
 endif
-set runtimepath+=$HOME/.vim/bundles/repos/github.com/Shougo/dein.vim
+set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
-if dein#load_state('$HOME/.vim/bundles')
-    call dein#begin('$HOME/.vim/bundles')
-    call dein#add('Shougo/dein.vim')
+if dein#load_state('$HOME/.cache/dein')
+    call dein#begin('$HOME/.cache/dein')
+    call dein#add('$HOME/.cache/dein/repos/github.com/Shougo/dein.vim')
     call dein#add('itchyny/lightline.vim')
     call dein#add('chriskempson/base16-vim')
     call dein#end()
@@ -23,7 +23,6 @@ set number relativenumber
 " Text Formatting
 
 set autoindent
-set smartindent
 set nowrap
 set softtabstop=4
 set shiftwidth=4
