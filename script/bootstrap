@@ -103,9 +103,16 @@ link_file () {
 }
 
 install_dein () {
-    curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-    sh ./installer.sh $HOME/.cache/dein
-    rm ./installer.sh
+  curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+  sh ./installer.sh $HOME/.cache/dein
+  rm ./installer.sh
+}
+
+install_asdf () {
+  git clone https://github.com/asdf-vm/asdf.git ~/.cache/asdf
+  cd ~/.cache/asdf
+  git checkout "$(git describe --abbrev=0 --tags)"
+  cd $DOTFILES_ROOT
 }
 
 install_dotfiles () {
@@ -126,15 +133,32 @@ install_dotfiles () {
 
   # Prompt to install dein.vim
   if [ ! -d "$HOME/.cache/dein/repos/github.com/Shougo/dein.vim" ]; then
-      echo "Do you wish to install dein.vim?"
-      select yn in "Yes" "No"; do 
-          case $yn in
-              Yes ) info "installing dein.vim"; install_dein; break;;
-              No ) fail "dein.vim not installed"
-          esac
-      done
+    read -p "Do you wish to install dein.vim? [y/N] " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+      info "installing dein.vim"; 
+      install_dein; 
+    else
+      fail "dein.vim not installed"
+    fi
   else
-      success "dein.vim already installed" 
+    success "dein.vim already installed" 
+  fi
+
+  # Prompt to install asdf-vm
+  if [ ! -d "$HOME/.cache/asdf" ]; then
+    read -p "Do you wish to install asdf-vm? [y/N] " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+      info "installing asdf-vm"; 
+      install_asdf; 
+    else
+      fail "asdf-vm not installed"
+    fi
+  else
+    success "asdf-vm already installed" 
   fi
 }
 
