@@ -5,17 +5,9 @@ git clone http://github.com/skipkayhil/dotfiles ~/.dotfiles
 cd ~/.dotfiles
 script/bootstrap
 ```
-The bootstrap script symlinks all the `.symlink` files and then prompts to install [dein.vim](http://github.com/Shougo/dein.vim)
-## Packages (Arch/AUR)
-- bspwm
-  - sxhkd
-  - rofi (maybe, maybe dmenu)
-- base-devel
-  - pacaur
-- rxvt-unicode-patched 
-- zsh
-  - zsh-syntax-highlighting
-  - zsh-pure-prompt-git-latest
-- vim
-  - dein.vim
-- ttf-hack
+
+### Bootstrap 
+- Symlinks all of the `*.symlink` files into the `$HOME` directory (`.zshrc`, `.vimrc`, `.config`, etc.)
+- Clones the [Pure](https://github.com/sindresorhus/pure) and [fast-syntax-highlighting](https://github.com/zdharma/fast-syntax-highlighting) submodules and symlinks Pure into `zsh/plugins`
+- Prompts to install [dein.vim](https://github.com/Shougo/dein.vim)
+- Prompts to install [asdf-vm](https://github.com/asdf-vm/asdf)
