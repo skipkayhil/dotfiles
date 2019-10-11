@@ -1,6 +1,6 @@
-[submodule "zsh/plugins/pure"]
-	path = zsh/plugins/pure
-	url = https://github.com/sindresorhus/pure
 [submodule "zsh/plugins/fast-syntax-highlighting"]
 	path = zsh/plugins/fast-syntax-highlighting
 	url = https://github.com/zdharma/fast-syntax-highlighting
+[submodule "zsh/plugins/powerlevel10k"]
+	path = zsh/plugins/powerlevel10k
+	url = https://github.com/romkatv/powerlevel10k
