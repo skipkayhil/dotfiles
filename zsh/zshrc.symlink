@@ -2,6 +2,7 @@ export DISPLAY=:0.0
 
 # shortcut to the dotfiles path
 export ZSH=$HOME/.dotfiles
+export DOTFILES=$HOME/.dotfiles
 
 if [[ -a ~/.localrc ]]; then
   source ~/.localrc
