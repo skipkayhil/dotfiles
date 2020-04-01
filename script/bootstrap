@@ -128,8 +128,6 @@ install_dotfiles () {
 
   # Setup Pure prompt and fast-syntax-highlighting
   git submodule update --init --recursive
-  link_file $HOME/.dotfiles/zsh/plugins/pure/async.zsh $HOME/.dotfiles/zsh/plugins/async
-  link_file $HOME/.dotfiles/zsh/plugins/pure/pure.zsh $HOME/.dotfiles/zsh/plugins/prompt_pure_setup
 
   # Prompt to install dein.vim
   if [ ! -d "$HOME/.cache/dein/repos/github.com/Shougo/dein.vim" ]; then
@@ -137,13 +135,13 @@ install_dotfiles () {
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
-      info "installing dein.vim"; 
-      install_dein; 
+      info "installing dein.vim";
+      install_dein;
     else
       fail "dein.vim not installed"
     fi
   else
-    success "dein.vim already installed" 
+    success "dein.vim already installed"
   fi
 
   # Prompt to install asdf-vm
@@ -152,13 +150,13 @@ install_dotfiles () {
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
-      info "installing asdf-vm"; 
-      install_asdf; 
+      info "installing asdf-vm";
+      install_asdf;
     else
       fail "asdf-vm not installed"
     fi
   else
-    success "asdf-vm already installed" 
+    success "asdf-vm already installed"
   fi
 }
 
