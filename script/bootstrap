@@ -115,6 +115,25 @@ install_asdf () {
   cd $DOTFILES_ROOT
 }
 
+prompt_install() {
+  local name=$1 condition=$2
+
+  if (( condition == 0)); then
+    read -p "Do you wish to install $name [y/N] " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+      info "installing $name";
+      return 0
+    else
+      fail "$name not installed"
+    fi
+  else
+    success "$name already installed"
+  fi
+  return 1
+}
+
 install_dotfiles () {
   info 'installing dotfiles'
 
@@ -130,49 +149,31 @@ install_dotfiles () {
   git submodule update --init --recursive
 
   # Prompt to install dein.vim
-  if [ ! -d "$HOME/.cache/dein/repos/github.com/Shougo/dein.vim" ]; then
-    read -p "Do you wish to install dein.vim? [y/N] " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]
-    then
-      info "installing dein.vim";
-      install_dein;
-    else
-      fail "dein.vim not installed"
-    fi
-  else
-    success "dein.vim already installed"
+  [[ ! -d "$HOME/.cache/dein/repos/github.com/Shougo/dein.vim" ]]
+  if prompt_install "dein.vim" $?; then
+    install_dein
   fi
 
   # Prompt to install asdf-vm
-  if [ ! -d "$HOME/.cache/asdf" ]; then
-    read -p "Do you wish to install asdf-vm? [y/N] " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]
-    then
-      info "installing asdf-vm";
-      install_asdf;
-    else
-      fail "asdf-vm not installed"
-    fi
-  else
-    success "asdf-vm already installed"
+  [[ ! -d "$HOME/.cache/asdf" ]]
+  if prompt_install "asdf-vm" $?; then
+    install_asdf
   fi
 }
 
 install_dotfiles
 
 # If we're on a Mac, let's install and setup homebrew.
-if [ "$(uname -s)" == "Darwin" ]
-then
-  info "installing dependencies"
-  if source bin/dot > /tmp/dotfiles-dot 2>&1
-  then
-    success "dependencies installed"
-  else
-    fail "error installing dependencies"
-  fi
-fi
+# if [ "$(uname -s)" == "Darwin" ]
+# then
+#   info "installing dependencies"
+#   if source bin/dot > /tmp/dotfiles-dot 2>&1
+#   then
+#     success "dependencies installed"
+#   else
+#     fail "error installing dependencies"
+#   fi
+# fi
 
 echo ''
 echo '  All installed!'
