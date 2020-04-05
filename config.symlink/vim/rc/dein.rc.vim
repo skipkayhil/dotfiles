@@ -5,8 +5,8 @@ if !dein#load_state(s:path)
   finish
 endif
 
-let s:dein_toml = expand('$DOTFILES/vim/rc/dein.toml')
-" let s:dein_lazy_toml = expand('$DOTFILES/vim/rc/deinlazy.toml')
+let s:dein_toml = expand('$XDG_CONFIG_HOME/vim/rc/dein.toml')
+" let s:dein_lazy_toml = expand('$XDG_CONFIG_HOME/vim/rc/deinlazy.toml')
 
 call dein#begin(s:path, [expand('<sfile>'), s:dein_toml])
 
