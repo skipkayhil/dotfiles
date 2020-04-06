@@ -4,6 +4,8 @@ export DISPLAY=:0.0
 export ZSH=$HOME/.dotfiles
 export DOTFILES=$HOME/.dotfiles
 
+bindkey -e
+
 if [[ -a ~/.localrc ]]; then
   source ~/.localrc
 fi
