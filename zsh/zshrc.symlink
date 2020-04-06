@@ -37,9 +37,18 @@ do
   source $file
 done
 
-# initialize autocomplete here
+# Load and initialize the completion system ignoring insecure directories with a
+# cache time of 20 hours, so it should almost always regenerate the first time a
+# shell is opened each day.
 autoload -U compinit
-compinit
+_zcompdump="$XDG_CACHE_HOME/zsh/zcompdump"
+_comp_files=(${_zcompdump}(Nm-20))
+if (($#_comp_files)); then
+  compinit -i -C -d "$_zcompdump"
+else
+  echo "Regenerating compdump..."
+  compinit -i -d "$_zcompdump"
+fi
 
 source $DOTFILES/zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme
 source $DOTFILES/zsh/plugins/p10k.zsh
