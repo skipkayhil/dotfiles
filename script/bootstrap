@@ -150,6 +150,10 @@ install_dotfiles () {
   # Setup Pure prompt and fast-syntax-highlighting
   git submodule update --init --recursive
 
+  # Install fzf
+  "$DOTFILES_ROOT/opt/fzf/install" --bin
+  success 'fzf installed'
+
   # Prompt to install dein.vim
   [[ ! -d "$HOME/.cache/dein/repos/github.com/Shougo/dein.vim" ]]
   if prompt_install "dein.vim" $?; then

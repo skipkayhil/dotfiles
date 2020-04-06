@@ -7,9 +7,10 @@ else
     eval $(dircolors ~/.dotfiles/theme/dircolors.base16.dark)
 fi
 
-fpath=($ZSH/zsh/plugins $fpath)
+# updated fpath for future functions, autoload errors if empty so its commented
+fpath=($DOTFILES/zsh/functions $fpath)
 
-#autoload -U $ZSH/functions/*(:t)
+# autoload -U $DOTFILES/zsh/functions/*(:t)
 
 HISTFILE=~/.zsh_history
 HISTSIZE=10000

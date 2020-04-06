@@ -4,3 +4,9 @@
 [submodule "zsh/plugins/powerlevel10k"]
 	path = zsh/plugins/powerlevel10k
 	url = https://github.com/romkatv/powerlevel10k
+[submodule "opt/fzf"]
+	path = opt/fzf
+	url = https://github.com/junegunn/fzf
+[submodule "opt/fzf-tab"]
+	path = opt/fzf-tab
+	url = https://github.com/Aloxaf/fzf-tab
