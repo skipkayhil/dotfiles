@@ -12,7 +12,7 @@ fpath=($DOTFILES/zsh/functions $fpath)
 
 # autoload -U $DOTFILES/zsh/functions/*(:t)
 
-HISTFILE=~/.zsh_history
+HISTFILE="$XDG_DATA_HOME/zsh/history"
 HISTSIZE=10000
 SAVEHIST=10000
 
