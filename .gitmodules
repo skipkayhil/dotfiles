@@ -1,8 +1,8 @@
-[submodule "zsh/plugins/fast-syntax-highlighting"]
-	path = zsh/plugins/fast-syntax-highlighting
+[submodule "opt/fast-syntax-highlighting"]
+	path = opt/fast-syntax-highlighting
 	url = https://github.com/zdharma/fast-syntax-highlighting
-[submodule "zsh/plugins/powerlevel10k"]
-	path = zsh/plugins/powerlevel10k
+[submodule "opt/powerlevel10k"]
+	path = opt/powerlevel10k
 	url = https://github.com/romkatv/powerlevel10k
 [submodule "opt/fzf"]
 	path = opt/fzf
