@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+#
+# rho - automatically select an open port for rails
+#
+# any additional command line arguments will be passed to rails
+
+rho() {
+  port=3000
+  while nc -z localhost $port &>/dev/null; do
+    ((port++))
+  done
+
+  message="$ rails s -p $port $*"
+
+  echo -e "\e[90m${message}\e[0m"
+
+  rails s -p "$port" "$@"
+}
