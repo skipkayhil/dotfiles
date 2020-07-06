@@ -165,6 +165,18 @@ install_dotfiles () {
   if prompt_install "asdf-vm" $?; then
     install_asdf
   fi
+
+  if [[ "${OSTYPE}" == darwin* ]]; then
+    read -p "Do you wish to install Brewfile? [y/N] " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+      info "installing Brewfile";
+      brew bundle --no-lock --file "$DOTFILES_ROOT/config.symlink/homebrew/Brewfile"
+    else
+      fail "Brewfile not installed"
+    fi
+  fi
 }
 
 install_dotfiles
