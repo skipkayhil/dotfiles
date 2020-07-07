@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+#
+# Based on example from
 # https://github.com/junegunn/fzf/wiki/Examples#tmux
 #
 # tm - create new tmux session, or switch to existing one. Works from within tmux too. (@bag-man)
@@ -6,9 +8,22 @@
 # `tm irc` will attach to the irc session (if it exists), else it will create it.
 
 tm() {
-  [[ -n "$TMUX" ]] && change="switch-client" || change="attach-session"
+  _tm_ls() {
+    tmux list-sessions -F "#{session_name}" 2>/dev/null
+  }
+
+  _tm_change() {
+    [[ -n "$TMUX" ]] && change="switch-client" || change="attach-session"
+    tmux $change -t "$1"
+  }
+
+  _tm_fzf() {
+    fzf --exit-0 --reverse --preview 'tmux capture-pane -ep -S -$FZF_PREVIEW_LINES -t {} | sed -Ez "$ s/\n+$//" | tail -n $FZF_PREVIEW_LINES'
+  }
+
   if [ "$1" ]; then
-    tmux $change -t "$1" 2>/dev/null || (tmux new-session -d -s "$1" && tmux $change -t "$1"); return
+    tmux has -t "$1" 2>/dev/null || tmux new-session -d -s "$1"
+    _tm_change "$1"; return
   fi
-  session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux $change -t "$session" || echo "No sessions found."
+  _tm_change "$(_tm_ls | _tm_fzf)" || echo "Cancelled"
 }
