@@ -1,0 +1,13 @@
+#
+#
+# tree - a wrapper around fd and as-tree to output a tree of files
+#
+# tree [PATH...]
+#
+# By default shows the tree of the current directory, but PATH can be added to
+# output the tree at PATH
+
+tree() {
+  fd --hidden --exclude .git . "$@" | as-tree
+}
+
