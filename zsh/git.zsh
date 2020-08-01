@@ -1,13 +1,12 @@
-g() {
-  if [ "$#" -eq 0 ]
-  then
-    git status
-  else
-    git "$@"
-  fi
-}
+alias g="git"
 alias ga="git add"
-alias gs="git switch"
+alias gb="git branch"
 alias gc="git commit"
 alias gca="git commit --amend"
 alias gd="git diff"
+alias gds="git diff --staged"
+alias gf="git fetch"
+alias gg="git status"
+alias gl="git pull"
+alias gp="git push"
+alias gs="git switch"
