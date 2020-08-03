@@ -21,9 +21,6 @@ export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
 export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
 
-DOT_CONFIG_HOME=$XDG_CONFIG_HOME
-DOT_CACHE_HOME=$XDG_CACHE_HOME
-
 # Ensure the xdg data & cache directories exist
 [[ ! -d "${XDG_DATA_HOME}/zsh" ]] && mkdir -p "${XDG_DATA_HOME}/zsh"
 [[ ! -d "${XDG_CACHE_HOME}/zsh" ]] && mkdir -p "${XDG_CACHE_HOME}/zsh"
@@ -67,7 +64,5 @@ for file in ${(M)config_files:#*/completion.zsh}
 do
   source $file
 done
-
-unset config_files DOT_CONFIG_HOME DOT_CACHE_HOME
 
 source $ZSH/opt/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
