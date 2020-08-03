@@ -7,19 +7,19 @@ fi
 
 export DISPLAY=:0.0
 
-# shortcut to the dotfiles path
-export ZSH=$HOME/.dotfiles
 export DOTFILES=$HOME/.dotfiles
+
+export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
+export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
+export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
+
+export EDITOR='vim'
 
 bindkey -e
 
 if [[ -a ~/.localrc ]]; then
   source ~/.localrc
 fi
-
-export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
-export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
-export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
 
 # Ensure the xdg data & cache directories exist
 [[ ! -d "${XDG_DATA_HOME}/zsh" ]] && mkdir -p "${XDG_DATA_HOME}/zsh"
@@ -28,7 +28,7 @@ export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
 # all of our zsh files
 typeset -U config_files
 setopt extendedglob
-config_files=($ZSH/^[opt]/*.zsh)
+config_files=($DOTFILES/^[opt]/*.zsh)
 unsetopt extendedglob
 
 # load the path files
@@ -65,4 +65,4 @@ do
   source $file
 done
 
-source $ZSH/opt/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source $DOTFILES/opt/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
