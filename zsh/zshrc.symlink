@@ -15,10 +15,13 @@ export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
 
 export EDITOR='vim'
 
+# Load dotfile utility functions
+source "$XDG_CONFIG_HOME/zsh/utils.sh"
+
 bindkey -e
 
 if [[ -a ~/.localrc ]]; then
-  source ~/.localrc
+  source_file ~/.localrc
 fi
 
 # Ensure the xdg data & cache directories exist
@@ -31,17 +34,8 @@ setopt extendedglob
 config_files=($DOTFILES/^[opt]/*.zsh)
 unsetopt extendedglob
 
-# load the path files
-for file in ${(M)config_files:#*/path.zsh}
-do
-  source $file
-done
-
-# load everything but the path and completion files
-for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}
-do
-  source $file
-done
+# load everything
+source_files_in "${config_files[@]}"
 
 # Load and initialize the completion system ignoring insecure directories with a
 # cache time of 20 hours, so it should almost always regenerate the first time a
@@ -56,13 +50,15 @@ else
   compinit -i -d "$_zcompdump"
 fi
 
-source $DOTFILES/opt/powerlevel10k/powerlevel10k.zsh-theme
-source $DOTFILES/zsh/plugins/p10k.zsh
+# https://github.com/holman/dotfiles/blob/master/zsh/completion.zsh
+#
+# matches case insensitive for lowercase
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
-# load every completion after autocomplete loads
-for file in ${(M)config_files:#*/completion.zsh}
-do
-  source $file
-done
+# pasting with tabs doesn't perform completion
+zstyle ':completion:*' insert-tab pending
 
-source $DOTFILES/opt/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source_file $DOTFILES/opt/powerlevel10k/powerlevel10k.zsh-theme
+source_file $DOTFILES/zsh/plugins/p10k.zsh
+
+source_file $DOTFILES/opt/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
