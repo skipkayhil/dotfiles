@@ -11,4 +11,4 @@ alias ke="kubectl edit"
 alias kx="kubectl exec -it"
 alias kcg="kubectl config get-contexts"
 alias kcu="kubectl config use-context"
-
+alias kcc="kubectl config unset current-context"
