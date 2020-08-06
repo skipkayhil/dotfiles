@@ -1,8 +1,6 @@
 # Setup fzf
 # ---------
-if [[ ! "$PATH" == *$DOTFILES/opt/fzf/bin* ]]; then
-  export PATH="${PATH:+${PATH}:}$DOTFILES/opt/fzf/bin"
-fi
+prepend_path "$DOTFILES/opt/fzf/bin"
 
 # Auto-completion
 # ---------------

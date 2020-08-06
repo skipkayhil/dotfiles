@@ -5,9 +5,9 @@ fi
 # Put GNU utils ahead of BSD utils in Path/Manpath
 
 # coreutils
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+prepend_path "/usr/local/opt/coreutils/libexec/gnubin"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 # gnu-sed
-export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+prepend_path "/usr/local/opt/gnu-sed/libexec/gnubin"
 export MANPATH="/usr/local/opt/gnu-sed/libexec/gnuman:$MANPATH"

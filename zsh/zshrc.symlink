@@ -28,14 +28,10 @@ fi
 [[ ! -d "${XDG_DATA_HOME}/zsh" ]] && mkdir -p "${XDG_DATA_HOME}/zsh"
 [[ ! -d "${XDG_CACHE_HOME}/zsh" ]] && mkdir -p "${XDG_CACHE_HOME}/zsh"
 
-# all of our zsh files
-typeset -U config_files
-setopt extendedglob
-config_files=($DOTFILES/^[opt]/*.zsh)
-unsetopt extendedglob
+prepend_path "$DOTFILES/bin"
 
-# load everything
-source_files_in "${config_files[@]}"
+source_file "$DOTFILES/zsh/config.zsh"
+source_file "$DOTFILES/zsh/keys.zsh"
 
 # load tool configuration
 source_files_in "$XDG_CONFIG_HOME"/zsh/tools.d/*.zsh
