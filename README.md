@@ -17,6 +17,15 @@ script/bootstrap
 - `config.symlink` is for configuration files and is symlinked to `$HOME/.config`
 - `opt` is for dependencies packaged as git submodules
 
+### Bad Hacks
+- If on Mac, create a `~/.zshenv` with the following:
+```sh
+if [[ ! -z $TMUX ]]; then
+    PATH=""
+fi
+```
+This unsets the path inside TMUX so that `path_helper` doesn't rearrange the `PATH`
+
 ### Inspiration
 
 - [holman](https://github.com/holman/dotfiles)
