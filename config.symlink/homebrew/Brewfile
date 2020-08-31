@@ -10,8 +10,8 @@ brew "fd"
 brew "git"
 brew "gitlab-runner"
 brew "gnu-sed"
-# brew "gnupg"
-# brew "pinentry-mac"
+brew "gnupg"
+brew "pinentry-mac"
 # brew "pkg-config"
 brew "postgresql", restart_service: true
 brew "redis", restart_service: true
