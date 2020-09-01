@@ -1,0 +1,110 @@
+#!/usr/bin/env bash
+#
+# jd - quickly jump to saved directories
+#
+# usage:
+#   jd [option] <alias>
+#
+# options:
+#   -s      save the current directory to the provided alias
+#   -d      remove the provided jump alias
+
+jd() {
+  __jd_shell() {
+    echo -e "\033[90m${1}\033[0m"
+  }
+
+  __jd_add() {
+    local alias=$1
+    local directory=$2
+    local file=$3
+
+    echo "$alias:$directory" >> "$file"
+    sort -o "$file" "$file"
+  }
+
+  __jd_remove() {
+    local alias=$1
+    local file=$2
+
+    sed "/^$alias:/d" "$file" > "$file.temp"
+    mv -- "$file.temp" "$file"
+  }
+
+  jd_dir="${XDG_DATA_HOME:-$HOME/.local/share}/jd"
+  alias_file="$jd_dir/aliases"
+
+  # create the alias file if it doesn't exist
+  if [ ! -f "$alias_file" ]; then
+    mkdir -p "$jd_dir"
+    touch "$alias_file"
+  fi
+
+  local OPTIND save remove
+  while getopts "sd" o; do
+    case "${o}" in
+      s)
+        save=true
+        ;;
+      d)
+        remove=true
+        ;;
+      *)
+        echo "Invalid flag provided: '$o'"
+        return 1
+        ;;
+    esac
+  done
+  shift $((OPTIND - 1))
+
+  alias=$1
+  directory=$(awk -F: "/^$alias:/ { print \$2 }" "$alias_file")
+
+  if [ "$remove" = true ] && [ "$save" = true ]; then
+    echo 'Invalid combination of flags: -sd'
+    return 1
+  elif [ "$save" = true ]; then
+    if grep -Fq "$PWD" "$alias_file"; then
+      # Save attempted, but directory already has a jump alias
+      escaped_pwd="${PWD//\//\\/}"
+
+      alias_for_pwd=$(awk -F: "/$escaped_pwd/ { print \$1 }" "$alias_file")
+      echo "The current directory already has a jump alias: '$alias_for_pwd'"
+
+      return 1
+    elif [ -z "$directory" ]; then
+      # Save attempted, no alias for directory, no directory for alias
+
+      __jd_add "$alias" "$PWD" "$alias_file"
+      echo "Jump alias '$alias' created: '$PWD'"
+    else
+      # Save attempted, no alias for directory, alias already has a directory
+
+      __jd_remove "$alias" "$alias_file"
+      __jd_add "$alias" "$PWD" "$alias_file"
+      echo "Jump alias '$alias' updated: '$PWD'"
+    fi
+
+    return
+  elif [ "$remove" = true ]; then
+    if [ -z "$directory" ]; then
+      echo "Cannot remove the jump alias '$alias' because it doesn't exist"
+      return 1
+    fi
+
+    __jd_remove "$alias" "$alias_file"
+    echo "Jump alias '$alias' removed: '$directory'"
+    return
+  fi
+
+  if [ -z "$directory" ]; then
+    echo "Jump alias '$alias' not found."
+    return 1
+  fi
+
+  __jd_shell "$ cd \"$directory\""
+
+  unset -f __jd_shell __jd_add __jd_remove
+
+  cd "$directory" || return
+}
