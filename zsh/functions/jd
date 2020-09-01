@@ -31,8 +31,8 @@ jd() {
     mv -- "$file.temp" "$file"
   }
 
-  jd_dir="${XDG_DATA_HOME:-$HOME/.local/share}/jd"
-  alias_file="$jd_dir/aliases"
+  local jd_dir="${XDG_DATA_HOME:-$HOME/.local/share}/jd"
+  local alias_file="$jd_dir/aliases"
 
   # create the alias file if it doesn't exist
   if [ ! -f "$alias_file" ]; then
@@ -57,7 +57,8 @@ jd() {
   done
   shift $((OPTIND - 1))
 
-  alias=$1
+  local alias=$1
+  local directory
   directory=$(awk -F: "/^$alias:/ { print \$2 }" "$alias_file")
 
   if [ "$remove" = true ] && [ "$save" = true ]; then
@@ -66,9 +67,11 @@ jd() {
   elif [ "$save" = true ]; then
     if grep -Fq "$PWD" "$alias_file"; then
       # Save attempted, but directory already has a jump alias
-      escaped_pwd="${PWD//\//\\/}"
+      local escaped_pwd="${PWD//\//\\/}"
+      local alias_for_pwd
 
       alias_for_pwd=$(awk -F: "/$escaped_pwd/ { print \$1 }" "$alias_file")
+
       echo "The current directory already has a jump alias: '$alias_for_pwd'"
 
       return 1
