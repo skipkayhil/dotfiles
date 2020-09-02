@@ -8,8 +8,21 @@
 # options:
 #   -s      save the current directory to the provided alias
 #   -d      remove the provided jump alias
+#   -l      print alias file
+#   -h      show usage
 
 jd() {
+  __jd_usage() {
+    echo -n "jd [option] <alias>
+
+options:
+  -s      save the current directory to the provided alias
+  -d      remove the provided jump alias
+  -l      print alias file
+  -h      show usage
+"
+  }
+
   __jd_shell() {
     echo -e "\033[90m${1}\033[0m"
   }
@@ -41,16 +54,26 @@ jd() {
   fi
 
   local OPTIND save remove
-  while getopts "sd" o; do
+  while getopts ":sdhl" o; do
     case "${o}" in
       s)
+        [ "$remove" = true ] && { __jd_usage; return 1; }
         save=true
         ;;
       d)
+        [ "$save" = true ] && { __jd_usage; return 1; }
         remove=true
         ;;
+      h)
+        __jd_usage
+        return
+        ;;
+      l)
+        cat "$alias_file"
+        return
+        ;;
       *)
-        echo "Invalid flag provided: '$o'"
+        __jd_usage
         return 1
         ;;
     esac
@@ -61,16 +84,14 @@ jd() {
   local directory
   directory=$(awk -F: "/^$alias:/ { print \$2 }" "$alias_file")
 
-  if [ "$remove" = true ] && [ "$save" = true ]; then
-    echo 'Invalid combination of flags: -sd'
-    return 1
-  elif [ "$save" = true ]; then
-    if grep -Fq "$PWD" "$alias_file"; then
+  if [ "$save" = true ]; then
+    local escaped_pwd="${PWD//\//\\/}"
+
+    if grep -q "$escaped_pwd$" "$alias_file"; then
       # Save attempted, but directory already has a jump alias
-      local escaped_pwd="${PWD//\//\\/}"
       local alias_for_pwd
 
-      alias_for_pwd=$(awk -F: "/$escaped_pwd/ { print \$1 }" "$alias_file")
+      alias_for_pwd=$(awk -F: "/$escaped_pwd$/ { print \$1 }" "$alias_file")
 
       echo "The current directory already has a jump alias: '$alias_for_pwd'"
 
