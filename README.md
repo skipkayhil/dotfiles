@@ -20,7 +20,7 @@ script/bootstrap
 ### Bad Hacks
 - If on Mac, create a `~/.zshenv` with the following:
 ```sh
-if [[ ! -z $TMUX ]]; then
+if [[ ! -z $TMUX ]] && [[ -z $MYVIMRC ]]; then
     PATH=""
 fi
 ```
