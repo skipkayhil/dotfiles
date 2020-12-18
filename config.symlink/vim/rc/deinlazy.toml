@@ -1,0 +1,18 @@
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+on_cmd = 'DeniteProjectDir'
+hook_source = 'source $XDG_CONFIG_HOME/vim/rc/plugins/denite.rc.vim'
+hook_add = '''
+  nnoremap <C-p> :DeniteProjectDir -start-filter file/rec<CR>
+'''
+
+[plugins.ftplugin]
+denite-filter = '''
+  inoremap <silent><buffer><expr> <CR>
+  \ denite#do_map('do_action')
+  inoremap <silent><buffer><expr> <Esc>
+  \ denite#do_map('quit')
+  nnoremap <silent><buffer><expr> <Esc>
+  \ denite#do_map('quit')
+'''
+

@@ -9,3 +9,10 @@ repo = 'itchyny/lightline.vim'
 
 [[plugins]]
 repo = 'chriskempson/base16-vim'
+
+[[plugins]]
+repo = 'roxma/nvim-yarp'
+
+[[plugins]]
+repo = 'roxma/vim-hug-neovim-rpc'
+on_if = '!has("nvim")'
