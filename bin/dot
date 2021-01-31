@@ -1,9 +1,12 @@
-#!/bin/sh
+#!/usr/bin/env bash
 #
-# dot
+# dot - handle dotfiles updates
 #
-# 'dot' handles updates
-# export ZSH=$HOME/.dotfiles
-#
-# might make this an updater but idk
 
+__dot_shell() {
+  echo -e "\033[90m${1}\033[0m"
+}
+
+# Run fzf install script to update binary
+__dot_shell "$ $DOTFILES/opt/fzf/install --bin"
+"$DOTFILES"/opt/fzf/install --bin
