@@ -1,31 +1,55 @@
 if &compatible
-    set nocompatible
+  set nocompatible
 endif
-set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
-execute 'source' fnameescape(expand('$XDG_CONFIG_HOME/vim/rc/dein.rc.vim'))
+call plug#begin(expand('$XDG_DATA_HOME/plugged'))
 
-filetype plugin indent on
-syntax enable
+" Plug 'sheerun/vim-polyglot', has('nvim') ? { 'on': [] } : {}
+
+Plug 'itchyny/lightline.vim'
+Plug 'chriskempson/base16-vim'
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  nnoremap <C-p> :<C-u>FZF<CR>
+
+Plug 'nvim-treesitter/nvim-treesitter', has('nvim') ? {'do': ':TSUpdate'} : { 'on': [] }
+
+Plug 'mhinz/vim-signify'
+  let g:signify_sign_add               = '│'
+  let g:signify_sign_delete            = '│'
+  let g:signify_sign_delete_first_line = '│'
+  let g:signify_sign_change            = '│'
+  let g:signify_sign_change_delete     = '│'
+
+call plug#end()
+
+" filetype plugin indent on
+" syntax enable
 
 set number relativenumber
+
+" Trigger async updates faster
+set updatetime=100
+
+" Text Formatting
+set autoindent
+set tabstop=2
+set shiftwidth=2
+set expandtab smarttab
+set textwidth=80
+set nowrap
 
 " Keymapping timeout
 set timeout timeoutlen=3000 ttimeoutlen=100
 
-" Text Formatting
-set autoindent
-set nowrap
-set softtabstop=4
-set shiftwidth=4
-set tabstop=4
-set expandtab
-set textwidth=80
+" Search as you type - Vim defaults to false
+set incsearch
 
 " Make sure Lightline shows up
 set laststatus=2
 
 set mouse=a
 
+set t_Co=256
 let base16colorspace=256
 colorscheme base16-materia
