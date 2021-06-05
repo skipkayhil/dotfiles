@@ -9,7 +9,7 @@ call plug#begin(expand('$XDG_DATA_HOME/plugged'))
 Plug 'itchyny/lightline.vim'
 Plug 'chriskempson/base16-vim'
 
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug expand('$DOTFILES/opt/fzf'), { 'do': { -> fzf#install() } }
   nnoremap <C-p> :<C-u>FZF<CR>
 
 Plug 'nvim-treesitter/nvim-treesitter', has('nvim') ? {'do': ':TSUpdate'} : { 'on': [] }
