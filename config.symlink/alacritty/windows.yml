@@ -1,0 +1,10 @@
+# TO USE: symlink this file to %appdata%/alacritty/alacritty.yml
+# this assumes that .dotfiles repo is in ~/.dotfiles in Windows
+
+import:
+  - "~/.dotfiles/config.symlink/alacritty/alacritty.yml"
+
+shell:
+  program: "C:\\Windows\\System32\\wsl.exe"
+  args:
+    - "~"
