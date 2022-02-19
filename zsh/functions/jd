@@ -19,6 +19,7 @@ options:
   -s      save the current directory to the provided alias
   -d      remove the provided jump alias
   -l      print alias file
+  -e      open the alias file in \$EDITOR
   -h      show usage
 "
   }
@@ -54,7 +55,7 @@ options:
   fi
 
   local OPTIND save remove
-  while getopts ":sdhl" o; do
+  while getopts ":sdleh" o; do
     case "${o}" in
       s)
         [ "$remove" = true ] && { __jd_usage; return 1; }
@@ -64,12 +65,16 @@ options:
         [ "$save" = true ] && { __jd_usage; return 1; }
         remove=true
         ;;
-      h)
-        __jd_usage
+      l)
+        column -s : -t "$alias_file"
         return
         ;;
-      l)
-        cat "$alias_file"
+      e)
+        $EDITOR "$alias_file"
+        return
+        ;;
+      h)
+        __jd_usage
         return
         ;;
       *)
