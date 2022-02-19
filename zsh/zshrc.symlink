@@ -60,4 +60,4 @@ zstyle ':completion:*' insert-tab pending
 source_file $DOTFILES/opt/powerlevel10k/powerlevel10k.zsh-theme
 source_file $DOTFILES/zsh/plugins/p10k.zsh
 
-source_file $DOTFILES/opt/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source_file $DOTFILES/opt/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh

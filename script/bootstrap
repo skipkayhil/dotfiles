@@ -151,7 +151,7 @@ install_dotfiles () {
     link_file "$src" "$dst"
   done < <(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink' -not -path '*.git*' -print0)
 
-  # Setup Pure prompt and fast-syntax-highlighting
+  # Setup /opt dependencies
   git submodule update --init --recursive
 
   # Install fzf
