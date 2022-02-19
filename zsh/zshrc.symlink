@@ -13,12 +13,17 @@ export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
 export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
 
-export EDITOR='vim'
+if (( $+commands[nvim] )); then
+  alias vim='nvim'
+  export EDITOR='nvim'
+else
+  export EDITOR='vim'
+fi
 
 # Load dotfile utility functions
 source "$XDG_CONFIG_HOME/zsh/utils.sh"
 
-bindkey -e
+KEYTIMEOUT=1
 
 if [[ -a ~/.localrc ]]; then
   source_file ~/.localrc
