@@ -1,6 +1,6 @@
 # Setup fzf
 # ---------
-prepend_path "$DOTFILES/opt/fzf/bin"
+path+=("$DOTFILES/opt/fzf/bin")
 
 # Auto-completion
 # ---------------

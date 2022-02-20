@@ -21,19 +21,6 @@ script/bootstrap
 - `bin` is for scripts and is added to `PATH`
 - `opt` is for dependencies packaged as git submodules
 
-### Bad Hacks
-
-- If on Mac, create a `~/.zprofile` with the following:
-
-```sh
-if [[ ! -z $TMUX ]] && [[ -z $MYVIMRC ]]; then
-    PATH=""
-    source '/etc/zprofile'
-fi
-```
-
-This unsets the path inside TMUX so that `path_helper` doesn't rearrange the `PATH`
-
 ### Inspiration
 
 - [holman](https://github.com/holman/dotfiles)

@@ -9,3 +9,5 @@ export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
 export DOTFILES=$HOME/.dotfiles
 
 ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
+
+typeset -gU fpath path
