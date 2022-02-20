@@ -2,12 +2,7 @@
 #
 # bootstrap installs things.
 
-cd "$(dirname "$0")/.."
-DOTFILES_ROOT=$(pwd -P)
-
-set -e
-
-echo ''
+set -euo pipefail
 
 info () {
   printf "\r  [ \033[00;34m..\033[0m ] %s\n" "$1"
@@ -21,10 +16,8 @@ success () {
   printf "\r\033[2K  [ \033[00;32mOK\033[0m ] %s\n" "$1"
 }
 
-fail () {
-  printf "\r\033[2K  [\033[0;31mFAIL\033[0m] %s\n" "$1"
-  echo ''
-  exit
+pass () {
+  printf "\r\033[2K  [ \033[0;33m>>\033[0m ] %s\n" "$1"
 }
 
 link_file () {
@@ -130,7 +123,7 @@ prompt_install() {
       info "installing $name";
       return 0
     else
-      fail "$name not installed"
+      pass "$name not installed"
     fi
   else
     info "$name already installed"
@@ -143,20 +136,14 @@ install_dotfiles () {
 
   local overwrite_all=false backup_all=false skip_all=false
 
-  # if I ever convert this to zsh script, I can use this glob (req. extendedglob)
-  # for src in {*,(^.git)/*}.symlink(:a)
-  while IFS= read -r -d '' src
-  do
-    dst="$HOME/.$(basename "${src%.*}")"
-    link_file "$src" "$dst"
-  done < <(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink' -not -path '*.git*' -print0)
+  typeset -a files=(.zshenv .config)
+
+  for f in "${files[@]}"; do
+    link_file "$DOTFILES_ROOT/$f" "$HOME/$f"
+  done
 
   # Setup /opt dependencies
   git submodule update --init --recursive
-
-  # Install fzf
-  "$DOTFILES_ROOT/opt/fzf/install" --bin
-  success 'fzf installed'
 
   # Prompt to install vim-plug
   [[ ! -f "$HOME/.local/share/nvim/site/autoload/plug.vim" ]]
@@ -176,26 +163,21 @@ install_dotfiles () {
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
       info "installing Brewfile";
-      brew bundle --no-lock --file "$DOTFILES_ROOT/config.symlink/homebrew/Brewfile"
+      brew bundle --no-lock --file "$DOTFILES_ROOT/.config/homebrew/Brewfile"
     else
-      fail "Brewfile not installed"
+      pass "Brewfile not installed"
     fi
   fi
 }
 
+cd "$(dirname "$0")/.."
+DOTFILES_ROOT=$(pwd -P)
+
+echo ''
+
 install_dotfiles
 
-# If we're on a Mac, let's install and setup homebrew.
-# if [ "$(uname -s)" == "Darwin" ]
-# then
-#   info "installing dependencies"
-#   if source bin/dot > /tmp/dotfiles-dot 2>&1
-#   then
-#     success "dependencies installed"
-#   else
-#     fail "error installing dependencies"
-#   fi
-# fi
+"$DOTFILES_ROOT/bin/dot"
 
 echo ''
 echo '  All installed!'

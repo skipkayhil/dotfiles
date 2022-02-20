@@ -2,7 +2,7 @@
 # this assumes that .dotfiles repo is in ~/.dotfiles in Windows
 
 import:
-  - "~/.dotfiles/config.symlink/alacritty/alacritty.yml"
+  - "~/.dotfiles/.config/alacritty/alacritty.yml"
 
 shell:
   program: "C:\\Windows\\System32\\wsl.exe"

@@ -3,10 +3,23 @@
 # dot - handle dotfiles updates
 #
 
+set -euo pipefail
+
 __dot_shell() {
   echo -e "\033[90m${1}\033[0m"
 }
 
+echo ''
+
 # Run fzf install script to update binary
 __dot_shell "$ $DOTFILES/opt/fzf/install --bin"
 "$DOTFILES"/opt/fzf/install --bin
+
+echo ''
+
+# Clear the compinit cache so it rebuilds on next ZSH start
+_zcompdump="$XDG_CACHE_HOME/zsh/zcompdump*"
+for f in $_zcompdump; do
+  __dot_shell "$ rm $f"
+  [[ ! -e $f ]] || rm "$f"
+done

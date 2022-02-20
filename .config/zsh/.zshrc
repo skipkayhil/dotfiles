@@ -7,12 +7,6 @@ fi
 
 export DISPLAY=:0.0
 
-export DOTFILES=$HOME/.dotfiles
-
-export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
-export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
-export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
-
 if (( $+commands[nvim] )); then
   alias vim='nvim'
   export EDITOR='nvim'
@@ -35,11 +29,11 @@ fi
 
 prepend_path "$DOTFILES/bin"
 
-source_file "$DOTFILES/zsh/keys.zsh"
+source_file "$XDG_CONFIG_HOME/zsh/keys.zsh"
 
 # load tool configuration
 source_files_in "$XDG_CONFIG_HOME"/zsh/tools.d/*.zsh
 
 source_files_in "$XDG_CONFIG_HOME"/zsh/init.d/*.zsh
 
-source_file $DOTFILES/opt/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+source_file "$DOTFILES/opt/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh"
