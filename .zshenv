@@ -10,4 +10,7 @@ export DOTFILES=$HOME/.dotfiles
 
 ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 
+# Prevent Ubuntu from running compinit in /etc/zsh/zshrc
+skip_global_compinit=1
+
 typeset -gU fpath path
