@@ -6,6 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 export DISPLAY=:0.0
+export GPG_TTY=$TTY
 
 if (( $+commands[nvim] )); then
   alias vim='nvim'
