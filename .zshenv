@@ -6,7 +6,11 @@ export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
 export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
 
-export DOTFILES=$HOME/.dotfiles
+# Allow dotfiles repo to have a dynamic location
+# %N gets the path of .zshenv
+# :A expands the path and follows symlinks
+# :h removes .zshenv so the result is the directory its in
+export DOTFILES=${${(%):-%N}:A:h}
 
 ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 
