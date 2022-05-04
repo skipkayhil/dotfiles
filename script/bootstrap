@@ -24,6 +24,7 @@ link_file () {
   local src=$1 dst=$2
 
   local overwrite backup skip action
+  skip=false
 
   if [ -f "$dst" ] || [ -d "$dst" ] || [ -L "$dst" ]
   then
@@ -88,7 +89,7 @@ link_file () {
     fi
   fi
 
-  if [ "${skip+false}" != "true" ]  # "false" or empty
+  if [ "$skip" != "true" ]
   then
     ln -s "$1" "$2"
     success "linked $1 to $2"
