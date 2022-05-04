@@ -32,10 +32,7 @@ link_file () {
     if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]
     then
 
-      local currentSrc
-      currentSrc="$(readlink "$dst")"
-
-      if [ "$currentSrc" == "$src" ]
+      if [ -L "$dst" ] && [ "$(readlink "$dst")" == "$src" ]
       then
 
         skip=true;
