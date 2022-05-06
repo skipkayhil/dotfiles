@@ -9,17 +9,40 @@ __dot_shell() {
   echo -e "\033[90m${1}\033[0m"
 }
 
-echo ''
+__dot_update_dotfiles() {
+  # Update dotfiles repository
+  pushd "$DOTFILES" >/dev/null
+  __dot_shell "$ git pull"
+  git pull
+  popd >/dev/null
+}
 
-# Run fzf install script to update binary
-__dot_shell "$ $DOTFILES/opt/fzf/install --bin"
-"$DOTFILES"/opt/fzf/install --bin
+__dot_fzf_install() {
+  # Run fzf install script to update binary
+  __dot_shell "$ $DOTFILES/opt/fzf/install --bin"
+  "$DOTFILES"/opt/fzf/install --bin
+}
 
-echo ''
+__dot_clear_compdump() {
+  # Clear the compinit cache so it rebuilds on next ZSH start
+  _zcompdump="$XDG_CACHE_HOME/zsh/zcompdump*"
+  for f in $_zcompdump; do
+    __dot_shell "$ rm $f"
+    [[ ! -e $f ]] || rm "$f"
+  done
+}
 
-# Clear the compinit cache so it rebuilds on next ZSH start
-_zcompdump="$XDG_CACHE_HOME/zsh/zcompdump*"
-for f in $_zcompdump; do
-  __dot_shell "$ rm $f"
-  [[ ! -e $f ]] || rm "$f"
-done
+main () {
+  commands=(
+    __dot_update_dotfiles
+    __dot_fzf_install
+    __dot_clear_compdump
+  )
+
+  for command in "${commands[@]}"; do
+    echo ''
+    $command
+  done
+}
+
+main
