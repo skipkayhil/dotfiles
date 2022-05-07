@@ -93,7 +93,7 @@ link_file () {
   fi
 }
 
-install_plug () {
+install_vim_plug () {
   # Vim (~/.vim/autoload)
   curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -103,7 +103,7 @@ install_plug () {
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 }
 
-install_asdf () {
+install_asdf_vm () {
   git clone https://github.com/asdf-vm/asdf.git ~/.cache/asdf
   cd ~/.cache/asdf
   git checkout "$(git describe --abbrev=0 --tags)"
@@ -111,22 +111,21 @@ install_asdf () {
 }
 
 prompt_install() {
-  local name=$1 condition=$2
+  local name=$1 installed_path=$2
 
-  if (( condition == 0)); then
+  if [[ ! -e "$installed_path" ]]; then
     read -p "Do you wish to install $name [y/N] " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
       info "installing $name";
-      return 0
+      install_"${name/-/_}"
     else
       pass "$name not installed"
     fi
   else
     info "$name already installed"
   fi
-  return 1
 }
 
 install_dotfiles () {
@@ -143,17 +142,9 @@ install_dotfiles () {
   # Setup /opt dependencies
   git submodule update --init --recursive
 
-  # Prompt to install vim-plug
-  [[ ! -f "$HOME/.local/share/nvim/site/autoload/plug.vim" ]]
-  if prompt_install "vim-plug" $?; then
-    install_plug
-  fi
+  prompt_install "vim-plug" "$HOME/.local/share/nvim/site/autoload/plug.vim"
 
-  # Prompt to install asdf-vm
-  [[ ! -d "$HOME/.cache/asdf" ]]
-  if prompt_install "asdf-vm" $?; then
-    install_asdf
-  fi
+  prompt_install "asdf-vm" "$HOME/.cache/asdf"
 
   if [[ "${OSTYPE}" == darwin* ]]; then
     read -p "Do you wish to install Brewfile? [y/N] " -n 1 -r
