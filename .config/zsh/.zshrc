@@ -28,13 +28,13 @@ fi
 [[ ! -d "${XDG_DATA_HOME}/zsh" ]] && mkdir -p "${XDG_DATA_HOME}/zsh"
 [[ ! -d "${XDG_CACHE_HOME}/zsh" ]] && mkdir -p "${XDG_CACHE_HOME}/zsh"
 
-path=("$DOTFILES/bin" $path)
-
 source_file "$XDG_CONFIG_HOME/zsh/keys.zsh"
 
 # load tool configuration
 source_files_in "$XDG_CONFIG_HOME"/zsh/tools.d/*.zsh
 
 source_files_in "$XDG_CONFIG_HOME"/zsh/init.d/*.zsh
+
+path=("$HOME/.local/bin" "$DOTFILES/bin" $path)
 
 source_file "$DOTFILES/opt/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh"
