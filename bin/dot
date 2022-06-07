@@ -12,8 +12,8 @@ __dot_shell() {
 __dot_update_dotfiles() {
   # Update dotfiles repository
   pushd "$DOTFILES" >/dev/null
-  __dot_shell "$ git pull"
-  git pull
+  __dot_shell "$ git pull --recurse-submodules"
+  git pull --recurse-submodules
   popd >/dev/null
 }
 
