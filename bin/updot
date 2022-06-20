@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# dot - handle dotfiles updates
+# updot - handle dotfiles updates
 #
 
 set -euo pipefail
