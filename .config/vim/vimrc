@@ -50,6 +50,10 @@ set laststatus=2
 
 set mouse=a
 
+" Recommended on the archwiki https://wiki.archlinux.org/title/St#Vim
+" for making termguicolors work (needed for vim but not nvim)
+set t_8f=[38;2;%lu;%lu;%lum        " set foreground color
+set t_8b=[48;2;%lu;%lu;%lum        " set background color
 set t_Co=256
 let base16colorspace=256
 colorscheme base16-materia
