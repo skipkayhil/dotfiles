@@ -1049,6 +1049,10 @@
   # Custom icon.
   # typeset -g POWERLEVEL9K_PACKAGE_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
+  #############[ chruby ]#############
+  # chruby color.
+  typeset -g POWERLEVEL9K_CHRUBY_FOREGROUND=168
+
   #############[ rbenv: ruby version from rbenv (https://github.com/rbenv/rbenv) ]##############
   # Rbenv color.
   typeset -g POWERLEVEL9K_RBENV_FOREGROUND=168
