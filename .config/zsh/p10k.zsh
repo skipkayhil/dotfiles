@@ -1052,6 +1052,7 @@
   #############[ chruby ]#############
   # chruby color.
   typeset -g POWERLEVEL9K_CHRUBY_FOREGROUND=168
+  typeset -g POWERLEVEL9K_CHRUBY_SHOW_ENGINE_PATTERN='^ruby'
 
   #############[ rbenv: ruby version from rbenv (https://github.com/rbenv/rbenv) ]##############
   # Rbenv color.
