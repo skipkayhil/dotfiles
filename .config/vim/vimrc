@@ -12,6 +12,20 @@ Plug 'chriskempson/base16-vim'
 Plug expand('$DOTFILES/opt/fzf'), { 'do': { -> fzf#install() } }
   nnoremap <C-p> :<C-u>FZF<CR>
 
+  function CoauthorLine(author)
+    let line = 'Co-authored-by:' . a:author
+    put =line
+  endfunction
+
+  function Coauthor()
+    call fzf#run({
+      \ 'source': 'git shortlog -sne --all | awk ''{$1=""}1''',
+      \ 'sink': function('CoauthorLine'),
+      \ })
+  endfunction
+
+  command! Coauthor call Coauthor()
+
 Plug 'nvim-treesitter/nvim-treesitter', has('nvim') ? {'do': ':TSUpdate'} : { 'on': [] }
 
 Plug 'mhinz/vim-signify'
