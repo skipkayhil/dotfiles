@@ -1,0 +1,53 @@
+#! /usr/bin/env bash
+#
+# zeta - automatically clone gitlab repos into corresponding path
+#
+zeta() {
+  if [ $# -eq 0 ]; then
+    echo "Repository name required"
+    return 1
+  fi
+
+  _zeta_shell() {
+    echo -e "\033[90m${1}\033[0m"
+  }
+
+  name=$1
+
+  _zeta_shell "$ curl ... | jq '... ${name}'"
+
+  repo_raw=$(
+    curl -sS "https://gitlab.com/api/graphql" \
+      --header "Content-Type: application/json" \
+      --request POST \
+      --data "{\"query\": \"query {projects {nodes {name fullPath sshUrlToRepo}}}\"}" |
+    jq ".data.projects.nodes | map(select(.name == \"$name\"))"
+  )
+
+  echo "$repo_raw"
+
+  num_repos=$(jq -n --argjson json "$repo_raw" '$json | length')
+
+  if [ "$num_repos" -gt 1 ]; then
+    echo "Multiple projects found"
+    return 1
+  elif [ "$num_repos" -eq 0 ]; then
+    echo "No projects found"
+    return 1
+  fi
+
+  typeset -A repo
+
+  while IFS="=" read -r key value; do
+    repo[$key]="$value"
+  done < <(jq -rn --argjson json "$repo_raw" '$json | .[0] | to_entries | .[] | .key + "=" + .value')
+
+  # typeset -p repo
+
+  # echo "${repo[name]}"
+  # echo "${repo[fullPath]}"
+
+  _zeta_shell "$ git clone ${repo[sshUrlToRepo]} $HOME/git/zeta/${repo[fullPath]}"
+
+  git clone "${repo[sshUrlToRepo]}" "$HOME/git/zeta/${repo[fullPath]}"
+}
