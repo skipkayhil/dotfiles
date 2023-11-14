@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+#
+# mr - quickly create merge requests on gitlab
+#
+# usage:
+#   mr [target-branch]
+
+mr() {
+  local origin source_branch target_branch repo_path url
+  origin=$(git remote get-url origin)
+  source_branch=$(git branch --show-current)
+  target_branch=${1:-"staging"}
+
+  repo_path=$(
+    echo "$origin" |
+      sed -e "s/^ssh:\/\/git@gitlab.com\///" |
+      sed -e "s/.git$//"
+  )
+
+  url="https://gitlab.com/$repo_path/-/merge_requests/new?merge_request[source_branch]=$source_branch&merge_request[target_branch]=$target_branch"
+
+  open "$url"
+}
