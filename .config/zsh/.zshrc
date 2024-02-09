@@ -28,8 +28,6 @@ fi
 [[ ! -d "${XDG_DATA_HOME}/zsh" ]] && mkdir -p "${XDG_DATA_HOME}/zsh"
 [[ ! -d "${XDG_CACHE_HOME}/zsh" ]] && mkdir -p "${XDG_CACHE_HOME}/zsh"
 
-source_file "$XDG_CONFIG_HOME/zsh/keys.zsh"
-
 # load tool configuration
 source_files_in "$XDG_CONFIG_HOME"/zsh/tools.d/*.zsh
 
