@@ -59,6 +59,7 @@ require("lazy").setup({
       },
     }
   },
+  "nvim-treesitter/nvim-treesitter-context",
   {
     "mhinz/vim-signify",
     init = function()
@@ -69,6 +70,24 @@ require("lazy").setup({
       vim.g.signify_sign_change_delete = "│"
     end,
   }
+}, {
+  ui = {
+    icons = {
+      cmd = "⌘",
+      config = "🛠",
+      event = "📅",
+      ft = "📂",
+      init = "⚙",
+      keys = "🗝",
+      plugin = "🔌",
+      runtime = "💻",
+      require = "🌙",
+      source = "📄",
+      start = "🚀",
+      task = "📌",
+      lazy = "💤 ",
+    },
+  },
 })
 
 vim.filetype.add({
