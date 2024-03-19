@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#
+# mkcd - create and change into a directory
+#
+# usage:
+#     mkcd <dir>
+
+mkcd() {
+  mkdir -p -- "$1" && cd -- "$1"
+}
