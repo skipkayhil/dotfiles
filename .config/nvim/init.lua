@@ -99,6 +99,7 @@ vim.filetype.add({
 vim.opt.laststatus = 2
 vim.opt.mouse = "a"
 
+vim.opt.number = true
 vim.opt.relativenumber = true
 
 -- Trigger async updates faster
