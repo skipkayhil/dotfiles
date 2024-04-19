@@ -61,6 +61,14 @@ require("lazy").setup({
   },
   "nvim-treesitter/nvim-treesitter-context",
   {
+    "neovim/nvim-lspconfig",
+    config = function()
+      lspconfig = require("lspconfig")
+      lspconfig.ruby_lsp.setup{}
+      lspconfig.rust_analyzer.setup{}
+    end
+  },
+  {
     "mhinz/vim-signify",
     init = function()
       vim.g.signify_sign_add = "│"
