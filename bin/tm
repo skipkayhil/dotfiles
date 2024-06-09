@@ -25,7 +25,7 @@ _tm_fzf() {
   # shellcheck disable=SC2016
   local lines='$FZF_PREVIEW_LINES'
 
-  fzf-tmux -p --exit-0 --reverse --preview \
+  fzf --tmux 80%,80% --exit-0 --reverse --preview \
     "tmux capture-pane -ep -S -$lines -t {} |
     sed -e :a -e '/^\n*\$/{\$d;N;};/\n\$/ba' |
     tail -n $lines"
