@@ -49,6 +49,8 @@ require("lazy").setup({
     main = "nvim-treesitter.configs",
     opts = {
       ensure_installed = {
+        -- required per README
+        "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline",
         "javascript",
         "markdown",
         "ruby",
