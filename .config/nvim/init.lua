@@ -29,9 +29,9 @@ require("lazy").setup({
           local buf = vim.api.nvim_get_current_buf()
 
           local coauthorline = function(author)
-            local line_number = vim.api.nvim_buf_line_count(buf)
+            local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 
-            vim.api.nvim_buf_set_lines(buf, line_number, line_number, true, { "Co-authored-by:" .. author })
+            vim.api.nvim_buf_set_lines(buf, row - 1, row - 1, true, { "Co-authored-by:" .. author })
           end
 
           vim.call("fzf#run", {
