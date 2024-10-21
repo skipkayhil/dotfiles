@@ -51,6 +51,7 @@ require("lazy").setup({
       ensure_installed = {
         -- required per README
         "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline",
+        "go",
         "javascript",
         "markdown",
         "ruby",
