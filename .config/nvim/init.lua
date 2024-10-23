@@ -14,7 +14,16 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Setup lazy.nvim
 require("lazy").setup({
-  "chriskempson/base16-vim",
+  {
+    "RRethy/base16-nvim",
+    lazy = false,
+    priority = 1000,
+    config = function(_, opts)
+      require("base16-colorscheme").setup()
+
+      vim.cmd.colorscheme("base16-materia")
+    end
+  },
   "itchyny/lightline.vim",
   {
     dir = vim.fn.expand("$DOTFILES/opt/fzf"),
@@ -136,4 +145,3 @@ vim.opt.textwidth = 80
 vim.opt.wrap = false
 
 vim.opt.termguicolors = true
-vim.cmd "colorscheme base16-materia"
