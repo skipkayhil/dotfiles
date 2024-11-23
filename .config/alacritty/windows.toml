@@ -1,0 +1,12 @@
+# in CMD:
+# mklink %appdata%\alacritty\alacritty.toml %userprofile%\.dotfiles\.config\alacritty\windows.toml
+# mklink %appdata%\alacritty\theme.toml %userprofile%\.dotfiles\.config\alacritty\theme.toml
+
+[general]
+import = [
+  "theme.toml",
+]
+
+[terminal.shell]
+program = "C:\\Windows\\System32\\wsl.exe"
+args = ["~"]

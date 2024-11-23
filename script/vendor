@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#
+# Vendor files into the repo
+
+set -euo pipefail
+
+wget https://raw.githubusercontent.com/aarowill/base16-alacritty/refs/heads/master/colors/base16-materia-256.toml \
+    -O "$DOTFILES/.config/alacritty/theme.toml"
