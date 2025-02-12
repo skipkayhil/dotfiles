@@ -17,13 +17,13 @@ __dot_update_dotfiles() {
   popd >/dev/null
 }
 
-__dot_update_asdf() {
-  command -v asdf >/dev/null || return 0
-
-  # Update asdf to latest stable release
-  __dot_shell "$ asdf update"
-  asdf update
-}
+# __dot_update_asdf() {
+#   command -v asdf >/dev/null || return 0
+#
+#   # Update asdf to latest stable release
+#   __dot_shell "$ asdf update"
+#   asdf update
+# }
 
 __dot_fzf_install() {
   # Run fzf install script to update binary
@@ -43,7 +43,7 @@ __dot_clear_compdump() {
 main () {
   commands=(
     __dot_update_dotfiles
-    __dot_update_asdf
+    # __dot_update_asdf
     __dot_fzf_install
     __dot_clear_compdump
   )
