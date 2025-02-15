@@ -1,3 +1,5 @@
+[alias]
+	pr = !sdev open pr
 [commit]
 	gpgsign = true
 [init]
