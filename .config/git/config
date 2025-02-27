@@ -1,10 +1,10 @@
 [alias]
-	pr = !sdev open pr
+  pr = !sdev open pr
 [commit]
-	gpgsign = true
+  gpgsign = true
 [init]
-	defaultBranch = main
+  defaultBranch = main
 [user]
-	signingkey = E823FC1403858A82
-	email = skipkayhil@gmail.com
-	name = Hartley McGuire
+  signingkey = E823FC1403858A82
+  email = skipkayhil@gmail.com
+  name = Hartley McGuire
