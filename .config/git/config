@@ -2,6 +2,8 @@
   pr = !sdev open pr
 [commit]
   gpgsign = true
+[diff]
+  algorithm = histogram
 [init]
   defaultBranch = main
 [user]
