@@ -24,7 +24,13 @@ require("lazy").setup({
       vim.cmd.colorscheme("base16-materia")
     end
   },
-  "itchyny/lightline.vim",
+  {
+    "echasnovski/mini.statusline",
+    opts = {
+      use_icons = false,
+    }
+    ,
+  },
   {
     dir = vim.fn.expand("$DOTFILES/opt/fzf"),
     cmd = "Coauthor",
