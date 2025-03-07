@@ -1,58 +1,58 @@
-# Base16 Materia 256 - alacritty color config
-# Defman21
+# Base16 Harmonic Evil 256 - alacritty color config
+# skipkayhil
 
 # Default colors
 [colors.primary]
-background = '0x263238'
-foreground = '0xcdd3de'
+background = '0x2b2e3b'
+foreground = '0xcacedf'
 
 # Colors the cursor will use if `custom_cursor_colors` is true
 [colors.cursor]
-text = '0x263238'
-cursor = '0xcdd3de'
+text = '0x2b2e3b'
+cursor = '0xcacedf'
 
 # Normal colors
 [colors.normal]
-black = '0x263238'
-red = '0xec5f67'
-green = '0x8bd649'
-yellow = '0xffcc00'
-blue = '0x89ddff'
-magenta = '0x82aaff'
-cyan = '0x80cbc4'
-white = '0xcdd3de'
+black = '0x2b2e3b'
+red = '0xfc8083'
+green = '0xa9c470'
+yellow = '0xe3cd94'
+blue = '0x9fd5fc'
+magenta = '0xafb5ff'
+cyan = '0x92ddce'
+white = '0xcacedf'
 
 # Bright colors
 [colors.bright]
-black = '0x707880'
-red = '0xec5f67'
-green = '0x8bd649'
-yellow = '0xffcc00'
-blue = '0x89ddff'
-magenta = '0x82aaff'
-cyan = '0x80cbc4'
-white = '0xffffff'
+black = '0x808393'
+red = '0xfc8083'
+green = '0xa9c470'
+yellow = '0xe3cd94'
+blue = '0x9fd5fc'
+magenta = '0xafb5ff'
+cyan = '0x92ddce'
+white = '0xf0f3ff'
 
 [[colors.indexed_colors]]
 index = 16
-color = "0xea9560"
+color = "0xfba581"
 
 [[colors.indexed_colors]]
 index = 17
-color = "0xec5f67"
+color = "0xf0a1d6"
 
 [[colors.indexed_colors]]
 index = 18
-color = "0x2c393f"
+color = "0x474a58"
 
 [[colors.indexed_colors]]
 index = 19
-color = "0x37474f"
+color = "0x666978"
 
 [[colors.indexed_colors]]
 index = 20
-color = "0xc9ccd3"
+color = "0xb5b9ca"
 
 [[colors.indexed_colors]]
 index = 21
-color = "0xd5dbe5"
+color = "0xdfe3f4"
