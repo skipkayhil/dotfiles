@@ -19,9 +19,7 @@ require("lazy").setup({
     lazy = false,
     priority = 1000,
     config = function(_, opts)
-      require("base16-colorscheme").setup()
-
-      vim.cmd.colorscheme("base16-materia")
+      vim.cmd.colorscheme("base16-harmonic-evil")
     end
   },
   {
