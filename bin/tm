@@ -16,7 +16,7 @@ _tm_ls() {
 _tm_change() {
   [[ -z "$1" ]] && exit
   [[ -z ${TMUX+x} ]] && change="attach-session" || change="switch-client"
-  tmux $change -t ="$1"
+  tmux "$change" -t ="$1"
 }
 
 _tm_fzf() {
@@ -34,6 +34,8 @@ _tm_fzf() {
 if [ $# -ge 1 ]; then
   tmux has -t ="$1" 2>/dev/null || tmux new-session -d -s "$1"
   _tm_change "$1"
+elif command -v sdev &>/dev/null; then
+  tmux display-popup -E 'sdev tmux --mode sessions'
 else
   _tm_change "$(_tm_ls | _tm_fzf)" || echo "Cancelled"
 fi
