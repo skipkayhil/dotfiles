@@ -103,13 +103,6 @@ install_vim_plug () {
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 }
 
-install_asdf_vm () {
-  git clone https://github.com/asdf-vm/asdf.git ~/.cache/asdf
-  cd ~/.cache/asdf
-  git checkout "$(git describe --abbrev=0 --tags)"
-  cd "$DOTFILES_ROOT"
-}
-
 prompt_install() {
   local name=$1 installed_path=$2
 
@@ -143,8 +136,6 @@ install_dotfiles () {
   git submodule update --init --recursive
 
   prompt_install "vim-plug" "$HOME/.local/share/nvim/site/autoload/plug.vim"
-
-  prompt_install "asdf-vm" "$HOME/.cache/asdf"
 
   if [[ "${OSTYPE}" == darwin* ]]; then
     read -p "Do you wish to install Brewfile? [y/N] " -n 1 -r
