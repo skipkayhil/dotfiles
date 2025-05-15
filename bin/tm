@@ -35,7 +35,11 @@ if [ $# -ge 1 ]; then
   tmux has -t ="$1" 2>/dev/null || tmux new-session -d -s "$1"
   _tm_change "$1"
 elif command -v sdev &>/dev/null; then
-  tmux display-popup -E 'sdev tmux --mode sessions'
+  if [ -z ${TMUX+x} ]; then
+    sdev tmux --mode sessions
+  else
+    tmux display-popup -E 'sdev tmux --mode sessions'
+  fi
 else
   _tm_change "$(_tm_ls | _tm_fzf)" || echo "Cancelled"
 fi
