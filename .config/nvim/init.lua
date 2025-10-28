@@ -23,11 +23,18 @@ require("lazy").setup({
     end
   },
   {
-    "echasnovski/mini.statusline",
+    "nvim-mini/mini.statusline",
     opts = {
       use_icons = false,
-    }
-    ,
+    },
+  },
+  {
+    "nvim-mini/mini.diff",
+    opts = {
+      view = {
+        style = "number",
+      },
+    },
   },
   {
     dir = vim.fn.expand("$DOTFILES/opt/fzf"),
@@ -89,16 +96,6 @@ require("lazy").setup({
       lspconfig.rust_analyzer.setup{}
     end
   },
-  {
-    "mhinz/vim-signify",
-    init = function()
-      vim.g.signify_sign_add = "│"
-      vim.g.signify_sign_delete = "│"
-      vim.g.signify_sign_delete_first_line = "│"
-      vim.g.signify_sign_change = "│"
-      vim.g.signify_sign_change_delete = "│"
-    end,
-  }
 }, {
   ui = {
     icons = {
