@@ -90,11 +90,6 @@ require("lazy").setup({
   },
   {
     "neovim/nvim-lspconfig",
-    config = function()
-      lspconfig = require("lspconfig")
-      lspconfig.ruby_lsp.setup{}
-      lspconfig.rust_analyzer.setup{}
-    end
   },
 }, {
   ui = {
@@ -120,6 +115,11 @@ vim.filetype.add({
   extension = {
     ejson = 'json'
   }
+})
+
+vim.lsp.enable({
+  'ruby_lsp',
+  'rust_analyzer',
 })
 
 vim.opt.laststatus = 2
