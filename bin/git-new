@@ -3,4 +3,4 @@
 # Generate branch name with hm- prefix and random (reverse hex) characters
 branch_name="hm-$(od -An -N8 -tx1 /dev/urandom | tr -d ' \n' | tr '0123456789abcdef' 'zyxwvutsrqponmlk')"
 
-git switch --create "$branch_name"
+git switch --create "$branch_name" "$@"
