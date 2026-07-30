@@ -119,7 +119,7 @@ install_dotfiles () {
   typeset -a files=(.zshenv .config)
 
   for f in "${files[@]}"; do
-    link_file "$DOTFILES_ROOT/$f" "$HOME/$f"
+    link_file "$DOTFILES/$f" "$HOME/$f"
   done
 
   # Setup /opt dependencies
@@ -131,7 +131,7 @@ install_dotfiles () {
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
       info "installing Brewfile";
-      brew bundle --no-lock --file "$DOTFILES_ROOT/.config/homebrew/Brewfile"
+      brew bundle --no-lock --file "$DOTFILES/.config/homebrew/Brewfile"
     else
       pass "Brewfile not installed"
     fi
@@ -139,13 +139,13 @@ install_dotfiles () {
 }
 
 cd "$(dirname "$0")/.."
-DOTFILES_ROOT=$(pwd -P)
+DOTFILES=$(pwd -P)
 
 echo ''
 
 install_dotfiles
 
-"$DOTFILES_ROOT/bin/updot"
+"$DOTFILES/bin/updot"
 
 echo ''
 echo '  All installed!'
