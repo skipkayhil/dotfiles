@@ -1,5 +1,5 @@
 alias g="git"
-alias ga="git add"
+
 alias gb="git branch"
 alias gc="git commit"
 alias gca="git commit --amend"
@@ -13,3 +13,17 @@ alias gp="git push"
 alias gr="git rebase"
 alias grc="git rebase --continue"
 alias gs="git switch"
+
+# depends on gg alias
+ga() {
+  if  [ $# -eq 0 ]; then
+    git add . -p
+  else
+    git add "$@"
+  fi
+
+  # run gg but return the exit code of git add
+  local exit_code=$?
+  gg
+  return $exit_code
+}
