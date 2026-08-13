@@ -1,11 +1,14 @@
 [alias]
   pr = !sdev open pr
 [commit]
+  cleanup = scissors
   gpgsign = true
 [diff]
   algorithm = histogram
 [init]
   defaultBranch = main
+[rebase]
+  autoStash = true
 [user]
   signingkey = E823FC1403858A82
   email = skipkayhil@gmail.com
