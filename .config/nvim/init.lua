@@ -65,22 +65,26 @@ require("lazy").setup({
   },
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
     build = ":TSUpdate",
-    main = "nvim-treesitter.configs",
-    opts = {
-      ensure_installed = {
-        -- required per README
-        "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline",
-        "go",
-        "javascript",
+    config = function()
+      local TS = require("nvim-treesitter")
+
+      local langs = {
+        "c",
+        "lua",
         "markdown",
         "ruby",
-        "rust"
-      },
-      highlight = {
-        enable = true,
-      },
-    }
+        "rust",
+      }
+
+      TS.install(langs)
+
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = langs,
+        callback = function() vim.treesitter.start() end,
+      })
+    end,
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
