@@ -115,7 +115,7 @@ index = 43
 color = '0x96c5a9'
 [[colors.indexed_colors]]
 index = 44
-color = '0x97d0c0'
+color = '0x96d0c0'
 [[colors.indexed_colors]]
 index = 45
 color = '0x95dbd7'
@@ -166,7 +166,7 @@ index = 60
 color = '0x828690'
 [[colors.indexed_colors]]
 index = 61
-color = '0x8e9eb0'
+color = '0x8d9eb0'
 [[colors.indexed_colors]]
 index = 62
 color = '0x98b7d1'
@@ -643,7 +643,7 @@ index = 219
 color = '0xc0c4ec'
 [[colors.indexed_colors]]
 index = 220
-color = '0xeabf91'
+color = '0xe9bf91'
 [[colors.indexed_colors]]
 index = 221
 color = '0xe4c1a2'
