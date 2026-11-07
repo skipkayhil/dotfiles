@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+#
+# home - manage "home" Nix profile built from nix/home
+#
+# Commands
+#   home build              build nix/home without applying it (prints store path)
+#   home switch             build nix/home and apply it to the profile
+#   home update [input...]  refresh pins (all, or named inputs), then switch
+#   home rollback           roll the profile back a generation
+#   home gens               list profile generations
+
+set -euo pipefail
+
+profile="$XDG_STATE_HOME/nix/profiles/home"
+
+build() {
+  nix-build "$DOTFILES/nix/home" --no-out-link
+}
+
+case "${1:-}" in
+  build)
+    build
+    ;;
+  switch)
+    out="$(build)"
+    nix-env -p "$profile" --set "$out"
+    ;;
+  update)
+    shift
+    (cd "$DOTFILES" && nixtamal refresh "$@")
+    exec "$0" switch
+    ;;
+  rollback)
+    nix-env -p "$profile" --rollback
+    ;;
+  gens)
+    nix-env -p "$profile" --list-generations
+    ;;
+  *)
+    sed -n '2,/^$/p' "$0" | sed 's/^# \{0,1\}//'
+    exit 1
+    ;;
+esac

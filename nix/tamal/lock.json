@@ -1,0 +1,7 @@
+{"v":"1.5.0"
+,"i":{
+"nixpkgs":{"sn":"nixpkgs-src","kd":[1,{"ft":0,"ur":"https://github.com/NixOS/nixpkgs/archive/f9a75f41be3a74eab55d3a7679d34ad6cc0da977.tar.gz","ms":[],"ex":null}],"ha":{"al":0,"vl":"sha256-Wojg9lIH/hDH91iDVH2/EPw8oDSpxjxhXONbU1yf4Zg="},"fv":"f9a75f41be3a74eab55d3a7679d34ad6cc0da977","ps":[]}
+,"nixtamal":{"sn":"nixtamal-src","kd":[3,{"rp":"https://darcs.toastal.in.th/nixtamal/stable","ms":["https://smeder.ee/~toastal/nixtamal.darcs"],"dt":"2026-10-30T09:16:37Z","rf":[0,[0,"./darcs_context/nixtamal.txt"]],"lw":"16ad90d6681f1567680ec7ecd005b971f2aa2606"}],"ha":{"al":0,"vl":"sha256-XHIs3CW94++3p2tQlDGYYG9eCmqIyV5ofNuPWEAsElI="},"fv":"16ad90d6681f1567680ec7ecd005b971f2aa2606","ps":[]}
+}
+,"p":{}
+}
