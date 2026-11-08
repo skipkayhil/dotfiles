@@ -1,9 +1,10 @@
 let
   inputs = import ../tamal { };
   pkgs = import inputs.nixpkgs {
-    # overlays = [
-    #   (import "${inputs.nixtamal}/nix/overlay")
-    # ];
+    overlays = [
+      #   (import "${inputs.nixtamal}/nix/overlay")
+      (import ../pkgs/overlay.nix)
+    ];
   };
 in
 pkgs.buildEnv {
@@ -13,5 +14,7 @@ pkgs.buildEnv {
 
     fd
     ripgrep
+
+    sdev
   ];
 }
