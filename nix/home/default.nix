@@ -1,4 +1,6 @@
-{ system ? builtins.currentSystem }:
+{
+  system ? builtins.currentSystem,
+}:
 
 let
   inputs = import ../tamal { inherit system; };
@@ -6,7 +8,6 @@ let
     inherit system;
     config = { };
     overlays = [
-      #   (import "${inputs.nixtamal}/nix/overlay")
       (import ../pkgs/overlay.nix)
     ];
   };
@@ -14,11 +15,18 @@ in
 pkgs.buildEnv {
   name = "home";
   paths = with pkgs; [
-    nixtamal
-
     fd
     ripgrep
 
     sdev
   ];
+
+  # tools for bin/home
+  passthru.tools = pkgs.buildEnv {
+    name = "home-tools";
+    paths = with pkgs; [
+      nixfmt
+      nixtamal
+    ];
+  };
 }

@@ -6,6 +6,7 @@
 #   home build              build nix/home without applying it (prints store path)
 #   home switch             build nix/home and apply it to the profile
 #   home update [input...]  refresh pins (all, or named inputs), then switch
+#   home fmt                format nix/ with nixfmt (except nix/tamal)
 #   home rollback           roll the profile back a generation
 #   home gens               list profile generations
 
@@ -17,18 +18,24 @@ build() {
   nix-build "$DOTFILES/nix/home" --no-out-link
 }
 
+tools() {
+  nix-build "$DOTFILES/nix/home" --no-out-link -A tools
+}
+
 case "${1:-}" in
   build)
     build
     ;;
   switch)
-    out="$(build)"
-    nix-env -p "$profile" --set "$out"
+    nix-env -p "$profile" --set "$(build)"
     ;;
   update)
     shift
-    (cd "$DOTFILES" && nixtamal refresh "$@")
+    (cd "$DOTFILES" && "$(tools)/bin/nixtamal" refresh "$@")
     exec "$0" switch
+    ;;
+  fmt)
+    (cd "$DOTFILES" && find nix -path nix/tamal -prune -o -name '*.nix' -exec "$(tools)/bin/nixfmt" {} +)
     ;;
   rollback)
     nix-env -p "$profile" --rollback
