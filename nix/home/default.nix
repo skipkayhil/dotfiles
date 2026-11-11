@@ -1,6 +1,10 @@
+{ system ? builtins.currentSystem }:
+
 let
-  inputs = import ../tamal { };
+  inputs = import ../tamal { inherit system; };
   pkgs = import inputs.nixpkgs {
+    inherit system;
+    config = { };
     overlays = [
       #   (import "${inputs.nixtamal}/nix/overlay")
       (import ../pkgs/overlay.nix)
